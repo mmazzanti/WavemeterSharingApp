@@ -1,7 +1,7 @@
 ﻿
 namespace WavemeterService
 {
-    partial class Service1
+    partial class WavemeterService
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,10 +29,18 @@ namespace WavemeterService
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.eventLog1 = new System.Diagnostics.EventLog();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
+            // 
+            // Service1
+            // 
             this.ServiceName = "Service1";
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
+
         }
 
         #endregion
+
+        private System.Diagnostics.EventLog eventLog1;
     }
 }
