@@ -17,8 +17,42 @@ namespace Wavemeter_SVC_Manager
     {
         private Service SVC;
         private System.Threading.Thread t;
-
+        private Boolean first_close = true;
         public Boolean runt = true;
+
+        delegate void SetTextCallback(Boolean STS);
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //if the form is minimized  
+            //hide it from the task bar  
+            //and show the system tray icon (represented by the NotifyIcon control) 
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                //notifyIcon1.Visible = true;
+                if (first_close == true) { 
+                    notifyIcon1.ShowBalloonTip(1000);
+                    first_close = false;
+                }
+            }
+        }
+        private void Form1_FormClosing(object sender, CancelEventArgs e)
+        {
+                e.Cancel = true;
+                Hide();
+                //notifyIcon1.Visible = true;
+                if (first_close == true)
+                {
+                    notifyIcon1.ShowBalloonTip(1000);
+                first_close = false;
+                }
+        }
+        private void notifyIcon_MouseClick(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            //notifyIcon1.Visible = false;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -37,7 +71,29 @@ namespace Wavemeter_SVC_Manager
             }
             t = new System.Threading.Thread(UpdateStatusLoop);
             t.Start();
-
+            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
+            this.Closing += Form1_FormClosing;
+        }
+        private void SetStatus(Boolean STS)
+        {
+            if (this.checkBox1.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetStatus);
+                this.Invoke(d, new object[] { STS });
+            }
+            else { 
+            if (STS == true)
+            {
+                checkBox1.Checked = true;
+                checkBox1.Text = Convert.ToString("Service is running");
+            }
+            else
+            {
+                checkBox1.Checked = false;
+                checkBox1.Text = Convert.ToString("Stopped/Not Running");
+            }
+            }
         }
         private void UpdateStatusLoop()
         {
@@ -48,13 +104,16 @@ namespace Wavemeter_SVC_Manager
                 SVC.LoadServiceInfo();
                 if (SVC.SVCStatus() == ServiceControllerStatus.Running)
                 {
-                    checkBox1.Checked = true;
-                    checkBox1.Text = Convert.ToString("Service is running");
+                    //checkBox1.Checked = true;
+                    SetStatus(true);
+                    //checkBox1.Text = Convert.ToString("Service is running");
                 }
                 else
                 {
-                    checkBox1.Checked = false;
-                    checkBox1.Text = Convert.ToString("Stopped/Not Running");
+                    //checkBox1.Checked = false;
+                    SetStatus(false);
+                    //SetText("Stopped/Not Running");
+                    //checkBox1.Text = Convert.ToString();
                 }    
                 Thread.Sleep(2000);
             }
@@ -100,7 +159,23 @@ namespace Wavemeter_SVC_Manager
 
         }
         private void RestartSVC_Click(object sender, EventArgs e)
-        { 
+        {
+            try { SVC.SVCRestart(); }
+            catch (Exception ex)
+            {
+                //The exception is raised by a service stop action, that can raise two possible events
+                if (ex is System.ComponentModel.Win32Exception)
+                {
+                    MessageBox.Show(ex.Message, "Error while stopping service!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (ex is InvalidOperationException)
+                {
+                    MessageBox.Show(ex.Message, "Error while stopping service!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            SVC.LoadServiceInfo();
+            LogBox.AppendText(DateTime.Now.ToString() + " Service status : " + SVC.SVCStatus() + "\r\n");
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -125,6 +200,36 @@ namespace Wavemeter_SVC_Manager
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void MenuRestore_Click(object sender, EventArgs e)
+        {
+            this.notifyIcon_MouseClick(sender, e);
+        }
+
+        private void MenuClose_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(1);
+        }
+
+        private void MenuRestartSVC_Click(object sender, EventArgs e)
+        {
+            this.RestartSVC_Click(sender, e);
+        }
+
+        private void Logo_Click(object sender, EventArgs e)
         {
 
         }

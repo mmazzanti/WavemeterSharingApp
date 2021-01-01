@@ -7,7 +7,6 @@ namespace Wavemeter_SVC_Manager
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -29,6 +28,7 @@ namespace Wavemeter_SVC_Manager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.RestartSVC = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -39,7 +39,13 @@ namespace Wavemeter_SVC_Manager
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuRestore = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuRestartSVC = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // RestartSVC
@@ -47,7 +53,7 @@ namespace Wavemeter_SVC_Manager
             this.RestartSVC.BackColor = System.Drawing.Color.Coral;
             this.RestartSVC.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.RestartSVC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RestartSVC.Font = new System.Drawing.Font("JuliaMono", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RestartSVC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RestartSVC.ForeColor = System.Drawing.Color.Black;
             this.RestartSVC.Location = new System.Drawing.Point(149, 228);
             this.RestartSVC.Name = "RestartSVC";
@@ -69,7 +75,7 @@ namespace Wavemeter_SVC_Manager
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.Location = new System.Drawing.Point(380, 84);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(210, 34);
+            this.checkBox1.Size = new System.Drawing.Size(173, 30);
             this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "Stopped/Not Running";
             this.checkBox1.UseVisualStyleBackColor = false;
@@ -130,18 +136,18 @@ namespace Wavemeter_SVC_Manager
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(189, 84);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 24);
+            this.label1.Size = new System.Drawing.Size(117, 20);
             this.label1.TabIndex = 6;
             this.label1.Text = "Service status :";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("JuliaMono", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(185, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(495, 48);
+            this.label2.Size = new System.Drawing.Size(452, 37);
             this.label2.TabIndex = 7;
             this.label2.Text = "Wavemeter Service Manager";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -158,6 +164,50 @@ namespace Wavemeter_SVC_Manager
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 8;
             this.Logo.TabStop = false;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon1.BalloonTipText = "Wavemeter service manager is still running...";
+            this.notifyIcon1.BalloonTipTitle = "Wavemeter service manager";
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "WavemeterService";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuRestartSVC,
+            this.MenuRestore,
+            this.MenuClose});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 100);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // MenuRestore
+            // 
+            this.MenuRestore.Name = "MenuRestore";
+            this.MenuRestore.Size = new System.Drawing.Size(198, 32);
+            this.MenuRestore.Text = "Restore";
+            this.MenuRestore.Click += new System.EventHandler(this.MenuRestore_Click);
+            // 
+            // MenuClose
+            // 
+            this.MenuClose.Name = "MenuClose";
+            this.MenuClose.Size = new System.Drawing.Size(198, 32);
+            this.MenuClose.Text = "Close";
+            this.MenuClose.Click += new System.EventHandler(this.MenuClose_Click);
+            // 
+            // MenuRestartSVC
+            // 
+            this.MenuRestartSVC.Name = "MenuRestartSVC";
+            this.MenuRestartSVC.Size = new System.Drawing.Size(198, 32);
+            this.MenuRestartSVC.Text = "Restart Service";
+            this.MenuRestartSVC.Click += new System.EventHandler(this.MenuRestartSVC_Click);
             // 
             // Form1
             // 
@@ -175,17 +225,17 @@ namespace Wavemeter_SVC_Manager
             this.Controls.Add(this.CheckSVC);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.RestartSVC);
-            this.Font = new System.Drawing.Font("JuliaMono", 8F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.ForeColor = System.Drawing.Color.Wheat;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Opacity = 0.98D;
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ShowIcon = false;
             this.Text = "Wavemeter service manager";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,6 +252,12 @@ namespace Wavemeter_SVC_Manager
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox Logo;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MenuRestore;
+        private System.Windows.Forms.ToolStripMenuItem MenuClose;
+        private System.Windows.Forms.ToolStripMenuItem MenuRestartSVC;
     }
+
 }
 

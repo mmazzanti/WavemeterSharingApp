@@ -13,7 +13,6 @@ namespace Wavemeter_SVC_Manager
     class Service
     {
         private ServiceController sc;
-
         public Service() //Constructor ? bit useless ?
         { 
         }
@@ -40,10 +39,10 @@ namespace Wavemeter_SVC_Manager
                     // Display properties for the Simple Service sample
                     // from the ServiceBase example.
                     sc = new ServiceController("WavemeterService");
-                    Console.WriteLine("Status = " + sc.Status);
-                    Console.WriteLine("Can Pause and Continue = " + sc.CanPauseAndContinue);
-                    Console.WriteLine("Can ShutDown = " + sc.CanShutdown);
-                    Console.WriteLine("Can Stop = " + sc.CanStop);
+                    //Console.WriteLine("Status = " + sc.Status);
+                    //Console.WriteLine("Can Pause and Continue = " + sc.CanPauseAndContinue);
+                    //Console.WriteLine("Can ShutDown = " + sc.CanShutdown);
+                    //Console.WriteLine("Can Stop = " + sc.CanStop);
                     found = 1;
                     /*
                     if (sc.Status == ServiceControllerStatus.Stopped)
@@ -82,6 +81,30 @@ namespace Wavemeter_SVC_Manager
         {
             try { sc.Stop(); }
             catch(Exception e) {
+                throw e;
+            }
+        }
+        public void SVCRestart()
+        {
+            sc.Refresh();
+            string svcStatus = sc.Status.ToString();
+            try 
+            {
+                sc.Refresh();
+                svcStatus = sc.Status.ToString();
+                if (svcStatus != "Stopped")
+                {
+                    sc.Stop();
+                }
+                while (svcStatus != "Stopped")
+                {
+                    sc.Refresh();
+                    svcStatus = sc.Status.ToString();
+                }
+                sc.Start();
+                }
+            catch (Exception e)
+            {
                 throw e;
             }
         }
