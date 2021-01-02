@@ -24,6 +24,7 @@ namespace Wavemeter_SVC_Manager
 
         public ServiceControllerStatus SVCStatus() 
         {
+            sc.Refresh();
             return sc.Status;
         }
 
@@ -44,29 +45,6 @@ namespace Wavemeter_SVC_Manager
                     //Console.WriteLine("Can ShutDown = " + sc.CanShutdown);
                     //Console.WriteLine("Can Stop = " + sc.CanStop);
                     found = 1;
-                    /*
-                    if (sc.Status == ServiceControllerStatus.Stopped)
-                    {
-                        sc.Start();
-                        while (sc.Status == ServiceControllerStatus.Stopped)
-                        {
-                            Thread.Sleep(1000);
-                            sc.Refresh();
-                        }
-                    }*/
-                    // Issue custom commands to the service
-                    // enum SimpleServiceCustomCommands
-                    //    { StopWorker = 128, RestartWorker, CheckWorker };
-                    //sc.ExecuteCommand((int)SimpleServiceCustomCommands.StopWorker);
-                    //sc.ExecuteCommand((int)SimpleServiceCustomCommands.RestartWorker);
-                    //sc.Pause();
-                    /*
-                    while (sc.Status != ServiceControllerStatus.Paused)
-                    {
-                        Thread.Sleep(1000);
-                        sc.Refresh();
-                    }
-                    */
                 }
             }
             if (found == 0)

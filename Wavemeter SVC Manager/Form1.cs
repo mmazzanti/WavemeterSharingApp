@@ -101,17 +101,22 @@ namespace Wavemeter_SVC_Manager
             {
                 if (runt == false)
                     { break; }
-                SVC.LoadServiceInfo();
+                //SVC.LoadServiceInfo();
                 if (SVC.SVCStatus() == ServiceControllerStatus.Running)
                 {
                     //checkBox1.Checked = true;
+                    if (checkBox1.Checked == false) { 
                     SetStatus(true);
+                    }
                     //checkBox1.Text = Convert.ToString("Service is running");
                 }
                 else
                 {
                     //checkBox1.Checked = false;
-                    SetStatus(false);
+                    if (checkBox1.Checked == true)
+                    {
+                        SetStatus(false);
+                    }
                     //SetText("Stopped/Not Running");
                     //checkBox1.Text = Convert.ToString();
                 }    
@@ -134,7 +139,7 @@ namespace Wavemeter_SVC_Manager
                 MessageBox.Show(ex.Message, "Error while stopping service!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            SVC.LoadServiceInfo();
+            //SVC.LoadServiceInfo();
             LogBox.AppendText(DateTime.Now.ToString() + " Service status : " + SVC.SVCStatus() + "\r\n");
 
         }
@@ -154,7 +159,7 @@ namespace Wavemeter_SVC_Manager
                     MessageBox.Show(ex.Message, "Error while starting service!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            SVC.LoadServiceInfo();
+            //SVC.LoadServiceInfo();
             LogBox.AppendText(DateTime.Now.ToString() + " Service status : " + SVC.SVCStatus() + "\r\n");
 
         }
@@ -173,7 +178,7 @@ namespace Wavemeter_SVC_Manager
                     MessageBox.Show(ex.Message, "Error while stopping service!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            SVC.LoadServiceInfo();
+            //SVC.LoadServiceInfo();
             LogBox.AppendText(DateTime.Now.ToString() + " Service status : " + SVC.SVCStatus() + "\r\n");
 
         }
@@ -189,17 +194,12 @@ namespace Wavemeter_SVC_Manager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SVC.LoadServiceInfo();
+            //SVC.LoadServiceInfo();
             LogBox.AppendText(DateTime.Now.ToString() + " Service status : " + SVC.SVCStatus() + "\r\n");
             //LogBox.Text = LogBox.Text + SVC.SVCStatus() + "\r\n";
         }
 
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
@@ -231,7 +231,8 @@ namespace Wavemeter_SVC_Manager
 
         private void Logo_Click(object sender, EventArgs e)
         {
-
+            string targetURL = @"https://github.com/mmazzanti/WavemeterService/tree/master";
+            System.Diagnostics.Process.Start(targetURL);
         }
     }
 }

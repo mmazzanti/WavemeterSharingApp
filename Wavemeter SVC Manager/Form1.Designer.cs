@@ -44,6 +44,7 @@ namespace Wavemeter_SVC_Manager
             this.MenuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuClose = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuRestartSVC = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@ namespace Wavemeter_SVC_Manager
             this.RestartSVC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RestartSVC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RestartSVC.ForeColor = System.Drawing.Color.Black;
-            this.RestartSVC.Location = new System.Drawing.Point(149, 228);
+            this.RestartSVC.Location = new System.Drawing.Point(196, 226);
             this.RestartSVC.Name = "RestartSVC";
             this.RestartSVC.Size = new System.Drawing.Size(210, 54);
             this.RestartSVC.TabIndex = 0;
@@ -73,7 +74,7 @@ namespace Wavemeter_SVC_Manager
             this.checkBox1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.checkBox1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox1.Location = new System.Drawing.Point(380, 84);
+            this.checkBox1.Location = new System.Drawing.Point(427, 82);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(173, 30);
             this.checkBox1.TabIndex = 1;
@@ -85,7 +86,7 @@ namespace Wavemeter_SVC_Manager
             // 
             this.CheckSVC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CheckSVC.ForeColor = System.Drawing.Color.Black;
-            this.CheckSVC.Location = new System.Drawing.Point(380, 228);
+            this.CheckSVC.Location = new System.Drawing.Point(427, 226);
             this.CheckSVC.Name = "CheckSVC";
             this.CheckSVC.Size = new System.Drawing.Size(210, 54);
             this.CheckSVC.TabIndex = 2;
@@ -109,7 +110,7 @@ namespace Wavemeter_SVC_Manager
             this.StartSVC.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.StartSVC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StartSVC.ForeColor = System.Drawing.Color.Black;
-            this.StartSVC.Location = new System.Drawing.Point(149, 143);
+            this.StartSVC.Location = new System.Drawing.Point(196, 141);
             this.StartSVC.Name = "StartSVC";
             this.StartSVC.Size = new System.Drawing.Size(210, 54);
             this.StartSVC.TabIndex = 4;
@@ -122,7 +123,7 @@ namespace Wavemeter_SVC_Manager
             this.StopSVC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.StopSVC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StopSVC.ForeColor = System.Drawing.Color.Black;
-            this.StopSVC.Location = new System.Drawing.Point(380, 143);
+            this.StopSVC.Location = new System.Drawing.Point(427, 141);
             this.StopSVC.Name = "StopSVC";
             this.StopSVC.Size = new System.Drawing.Size(210, 54);
             this.StopSVC.TabIndex = 5;
@@ -134,7 +135,7 @@ namespace Wavemeter_SVC_Manager
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(189, 84);
+            this.label1.Location = new System.Drawing.Point(236, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 20);
             this.label1.TabIndex = 6;
@@ -156,9 +157,9 @@ namespace Wavemeter_SVC_Manager
             // 
             this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Logo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Logo.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Logo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Logo.Image = ((System.Drawing.Image)(resources.GetObject("Logo.Image")));
-            this.Logo.Location = new System.Drawing.Point(12, 12);
+            this.Logo.Location = new System.Drawing.Point(28, 29);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(120, 120);
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -209,6 +210,17 @@ namespace Wavemeter_SVC_Manager
             this.MenuRestartSVC.Text = "Restart Service";
             this.MenuRestartSVC.Click += new System.EventHandler(this.MenuRestartSVC_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(24, 298);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Event log :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -216,6 +228,7 @@ namespace Wavemeter_SVC_Manager
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(742, 490);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Logo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -257,6 +270,7 @@ namespace Wavemeter_SVC_Manager
         private System.Windows.Forms.ToolStripMenuItem MenuRestore;
         private System.Windows.Forms.ToolStripMenuItem MenuClose;
         private System.Windows.Forms.ToolStripMenuItem MenuRestartSVC;
+        private System.Windows.Forms.Label label3;
     }
 
 }
