@@ -38,8 +38,9 @@ namespace WavemeterService
             // 
             // WavemeterService
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "WavemeterService";
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
+
 
         }
 

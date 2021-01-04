@@ -18,11 +18,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Runtime.InteropServices;
 
-namespace ConsoleService4Debug
+namespace WavemeterService
 {
     class WMChannel
     {
@@ -39,6 +37,12 @@ namespace ConsoleService4Debug
         public double Frequency { get; set; }
         public int[] PatternData;
         public int[] AnalysisData;
+        ~WMChannel()
+        {
+            // Free allocated memory at the destruction
+            Marshal.FreeHGlobal(Patternhglobal);
+            Marshal.FreeHGlobal(Analysishglobal);
+        }
 
         //public Dictionary<string, double> Wavelens { get; set; }
         //public int TemperatureCelsius { get; set; }
@@ -48,11 +52,6 @@ namespace ConsoleService4Debug
             set { Wavelengths[i] = value; }
         }
         */
-        ~WMChannel(){
-            // Free allocated memory at the destruction
-            Marshal.FreeHGlobal(Patternhglobal);
-            Marshal.FreeHGlobal(Analysishglobal);
-        }
         public void SetPatternSize(long Cnt, long Size)
         {
             PatternSize = Cnt * Size;
