@@ -5,14 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Runtime.InteropServices;
 
 namespace ConsoleService4Debug
 {
     class WMChannel
     {
+        private long PatternSize;
+        private IntPtr Patternhglobal;
+        private long PatternitemsCnt;
+        private long PatternitemsSize;
+        private long AnalysisSize;
+        private IntPtr Analysishglobal;
+        private long AnalysisitemsCnt;
+        private long AnalysisitemsSize;
         //private double Wavelengths = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        public double Wavelength { get; set; }
         public int Channel { get; set; }
+        public double Frequency { get; set; }
+        public int[] PatternData;
+        public int[] AnalysisData;
+
         //public Dictionary<string, double> Wavelens { get; set; }
         //public int TemperatureCelsius { get; set; }
         /*public double this[int i]
@@ -20,16 +32,63 @@ namespace ConsoleService4Debug
             get { return Wavelengths[i]; }
             set { Wavelengths[i] = value; }
         }
-
-        public void SetWL(int i,double WL)
+        */
+        public void SetPatternSize(long Cnt, long Size)
         {
-            Wavelengths[i] = WL;
+            PatternSize = Cnt * Size;
+            PatternitemsCnt = Cnt;
+            PatternitemsSize = Size;
+            Patternhglobal = Marshal.AllocHGlobal((int)PatternSize);
         }
-        public double GetWL(int i)
+        public void SetAnalysisSize(long Cnt,long Size)
         {
-            return Wavelengths[i];
-        }*/
+            AnalysisSize = Cnt*Size;
+            AnalysisitemsCnt = Cnt;
+            AnalysisitemsSize = Size;
+            Analysishglobal = Marshal.AllocHGlobal((int)AnalysisSize);
+        }
+        public long GetAnalysisSize()
+        {
+            return AnalysisSize;
+        }
+        public long GetPatternItemSize()
+        {
+            return PatternitemsSize;
+        }
+        public long GetPatternItemCnt()
+        {
+            return PatternitemsCnt;
+        }
+        public long GetPatternSize()
+        {
+            return PatternSize;
+        }
+        public IntPtr GetPatternPtr()
+        {
+            return Patternhglobal;
+        }
+        public IntPtr GetAnalysisPtr()
+        {
+            return Analysishglobal;
+        }
 
-        
+        public void SetPatternDataFromPtr()
+        {
+            PatternData = new int[PatternitemsCnt]; // Where to store the pattern data
+            for (int el = 0; el < PatternSize;)
+            {
+                int tmp = 0;
+                for (int bits = 0; bits < PatternitemsSize; bits++)
+                {
+                    tmp = tmp | Marshal.ReadByte(Patternhglobal, el+bits) << bits * 8; //Shift each byte by item# * 8 bit (first one shift by 0, second by 8 bits etc..) 
+                }
+                //PatternData[el] = Marshal.ReadByte(Patternhglobal, el) | Marshal.ReadByte(Patternhglobal, el + 1) << 8 | Marshal.ReadByte(Patternhglobal, el + 2) << 16 | Marshal.ReadByte(Patternhglobal, el + 3) << 24;
+                el += (int)PatternitemsSize;
+                PatternData[el/PatternitemsSize-1] = tmp;
+            }
+        }
+
+
+
     }
 }
