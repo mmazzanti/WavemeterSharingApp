@@ -23,28 +23,27 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Text.Json;
-//using System.Text.Json.Serialization;
+
 
 namespace ConsoleService4Debug
 {
     class Program
     {
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long Instantiate(long RFC, long Mode, long P1, long P2);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern double GetFrequencyNum(long channel, int res=0);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetAnalysisItemSize(long index);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetAnalysisItemCount(long index);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternItemSize(long index);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternItemCount(long index);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternDataNum(long Chn, long Index, IntPtr PArray);
-        [DllImport("lib/wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long SetPattern(long Index, long iEnable);
 
         private static List<IPAddress> BroadcastAddresses = new List<IPAddress>();
