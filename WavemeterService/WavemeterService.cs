@@ -67,21 +67,21 @@ namespace WavemeterService
 
         // ----- LOAD USEFUL WAVEMETER FUNCTIONS FROM THE wlmData.dll ----- //
         private static extern bool SetServiceStatus(System.IntPtr handle, ref ServiceStatus serviceStatus);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long Instantiate(long RFC, long Mode, long P1, long P2);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern double GetFrequencyNum(long channel, int res = 0);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetAnalysisItemSize(long index);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetAnalysisItemCount(long index);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternItemSize(long index);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternItemCount(long index);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long GetPatternDataNum(long Chn, long Index, IntPtr PArray);
-        [DllImport("C:\\Windows\\SysWOW64\\wlmData.dll")]
+        [DllImport("wlmData.dll")]
         public static extern long SetPattern(long Index, long iEnable);
         // ----- ENF OF LOAD USEFUL WAVEMETER FUNCTIONS FROM THE wlmData.dll ----- //
 

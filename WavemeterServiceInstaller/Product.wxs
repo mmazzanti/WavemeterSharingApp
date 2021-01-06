@@ -15,26 +15,26 @@
         <Directory Id='MMazzanti' Name='MMazzanti'>
           <Directory Id='INSTALLDIR1' Name='Wavemeter Service Manager'>
             <Component Id='MainExecutableManager' Guid='034123FA-E1D8-47F6-95C0-251A3D6784E8'>
-              <File Id='WMServiceManager' Name='Wavemeter SVC Manager.exe' DiskId='1' Source='..\Wavemeter SVC Manager\bin\Debug\Wavemeter SVC Manager.exe' KeyPath='yes'>
+              <File Id='WMServiceManager' Name='Wavemeter SVC Manager.exe' DiskId='1' Source='..\Wavemeter SVC Manager\bin\x86\Debug\Wavemeter SVC Manager.exe' KeyPath='yes'>
                 <Shortcut Id="WavemeterServiceManagerLINK" Directory="ProgramMenuDir" Name="WavemeterServiceManager" WorkingDirectory='INSTALLDIR1' Icon="WavemeterSVC.ico" IconIndex="0" Advertise="yes" />
               </File>
             </Component>
             <Component Id='MainExecutableManagerCNF' Guid='69B15A2B-028C-4810-9383-D85F02E07814'>
-              <File Id='WMServiceManagerCNF' Name='Wavemeter SVC Manager.exe.config' DiskId='1' Source='..\Wavemeter SVC Manager\bin\Debug\Wavemeter SVC Manager.exe.config' KeyPath='yes'/>
+              <File Id='WMServiceManagerCNF' Name='Wavemeter SVC Manager.exe.config' DiskId='1' Source='..\Wavemeter SVC Manager\bin\x86\Debug\Wavemeter SVC Manager.exe.config' KeyPath='yes'/>
             </Component>
           </Directory>
           <Directory Id='INSTALLDIR' Name='Wavemeter Service'>
               <Component Id='MainExecutableCNF' Guid='ADE7A0D6-072D-411E-978B-AC5029A1614D'>
-                <File Id='WMServiceCNF' Name='WavemeterService.exe.config' DiskId='1' Source='..\WavemeterService\bin\Debug\WavemeterService.exe.config' KeyPath='yes'>
+                <File Id='WMServiceCNF' Name='WavemeterService.exe.config' DiskId='1' Source='..\WavemeterService\bin\x86\Debug\WavemeterService.exe.config' KeyPath='yes'>
                 </File>
             </Component>
             
             <Directory Id='LibDir' Name='lib'>
             <Component Id='HelperLibrary' Guid='CBE59411-C6C6-496E-8B72-FD3AE9ED1B79'>
-              <File Id='JsonDLL' Name='Newtonsoft.Json.dll' DiskId='1' Source='..\WavemeterService\bin\Debug\lib\Newtonsoft.Json.dll' KeyPath='yes' />
+              <File Id='JsonDLL' Name='Newtonsoft.Json.dll' DiskId='1' Source='..\WavemeterService\bin\x86\Debug\lib\Newtonsoft.Json.dll' KeyPath='yes' />
             </Component>
             <Component Id='XMlDll' Guid='E38F8BAB-1207-44F3-ACBF-5438C6DF49C7'>
-              <File Id='JsonDLLXML' Name='Newtonsoft.Json.xml' DiskId='1' Source='..\WavemeterService\bin\Debug\lib\Newtonsoft.Json.xml' KeyPath='yes' />
+              <File Id='JsonDLLXML' Name='Newtonsoft.Json.xml' DiskId='1' Source='..\WavemeterService\bin\x86\Debug\lib\Newtonsoft.Json.xml' KeyPath='yes' />
               <!--<File Id='Manual' Name='Manual.pdf' DiskId='1' Source='Manual.pdf' KeyPath='yes'>
                 <Shortcut Id="startmenuManual" Directory="ProgramMenuDir" Name="Instruction Manual" Advertise="yes" />
               </File>-->
@@ -44,7 +44,7 @@
               </Component>
             </Directory>
             <Component Id='MainExecutable' Guid='AA74CF76-F0D0-4684-9225-D36D64843AF9'>
-              <File Id='WMService' Name='WavemeterService.exe' DiskId='1' Source='..\WavemeterService\bin\Debug\WavemeterService.exe' KeyPath='yes'>
+              <File Id='WMService' Name='WavemeterService.exe' DiskId='1' Source='..\WavemeterService\bin\x86\Debug\WavemeterService.exe' KeyPath='yes'>
                 <!--<Shortcut Id="WavemeterServiceStart" Directory="ProgramMenuDir" Name="WavemeterService" WorkingDirectory='INSTALLDIR' Icon="Icon.ico" IconIndex="0" Advertise="yes" />
                 <Shortcut Id="WavemeterServiceDesktop" Directory="DesktopFolder" Name="WavemeterService" WorkingDirectory='INSTALLDIR' Icon="Icon.ico" IconIndex="0" Advertise="yes" />-->
               </File>
