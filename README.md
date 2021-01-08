@@ -14,11 +14,9 @@ For an easy python example have a look at the folder Examples
 
 ## Wavemeter Sharing App ##
 ### GUI ###
+![GWSA_GUI](https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingApp.png)
 
-<a>
-  <img src="https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingApp.png" width="50%" height="50%">
-</a>
-- - - -
+----
 The software is self eplanatory; however here's a short explanation!
 * Start/stop buttons start and stop of sharing data on the UDP connection
 * Status button (running, in green in the image) : Gives a live update on the status of the program. If sharing data the icon will be green (with running text) otherwise red (with stopped text)
