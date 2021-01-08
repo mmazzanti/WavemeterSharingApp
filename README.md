@@ -13,8 +13,9 @@ The shared data can be easily read using python/c++ etc... For our purpose we'll
 For an easy python example have a look at the folder Examples
 __BEWARE__ : By deafault both installers don't install the wmData.dll needed for comunicating with the wavemeter through USB connection. This dll __must__ be the same as the one used by the software provided by the company (normally installed in sys32 or sysWOW64). If the wavemeter software is already installed the Wavemeter Service program will work without additional dlls. __However__ if you're using this software for debug/testing/whaver_other_reason you __must__ go through a custom installation and add the dll wmData.dll.
 ## Installers ##
-Wavemeter App : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/blob/master/SetupWavemeterSharingApp.msi)
-Wavemeter Service : [Wavemeter Service Installer](https://github.com/mmazzanti/WavemeterService/blob/master/WavemeterServiceInstaller.msi)
+Wavemeter App : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/raw/master/SetupWavemeterSharingApp.msi)
+
+Wavemeter Service : [Wavemeter Service Installer](https://github.com/mmazzanti/WavemeterService/raw/master/WavemeterServiceInstaller.msi)
 
 ## Proof of concept ##
 
