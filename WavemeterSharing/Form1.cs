@@ -366,5 +366,12 @@ namespace WavemeterSharingApp
             Settings1.Default.Connection = textBox1.Text;
             Settings1.Default.RefreshRate = (int)numericUpDown1.Value;
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            string targetURL = @"https://github.com/mmazzanti/WavemeterService/tree/master";
+            System.Diagnostics.Process.Start("explorer.exe", targetURL);
+            //System.Diagnostics.Process.Start(targetURL);
+        }
     }
 }
