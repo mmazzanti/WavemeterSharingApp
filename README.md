@@ -13,7 +13,7 @@ The shared data can be easily read using python/c++ etc... For our purpose we'll
 For an easy python example have a look at the folder Examples
 
 ## Wavemeter Sharing App ##
-GUI:
+ ![picture alt](https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingApp.png/725x572 "Wavemeter Sharing App GUI")
 <a>
   <img src="https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingApp.png" width="50%" height="50%">
 </a>
