@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wavemeter SVC Manager", "Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleService4Debug", "ConsoleService4Debug\ConsoleService4Debug.csproj", "{AF600CF8-7204-4892-ADD8-72FED7F0A976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WavemeterSharing", "WavemeterSharing\WavemeterSharing.csproj", "{C8064837-50E0-4CE3-89C8-D3CF99F1A5C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WavemeterSharingApp", "WavemeterSharing\WavemeterSharingApp.csproj", "{C8064837-50E0-4CE3-89C8-D3CF99F1A5C1}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupWavemeterSharingApp", "SetupWavemeterSharingApp\SetupWavemeterSharingApp.wixproj", "{855752CD-E532-4A36-A9E0-19EAA047A876}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +82,14 @@ Global
 		{C8064837-50E0-4CE3-89C8-D3CF99F1A5C1}.Release|x64.Build.0 = Release|Any CPU
 		{C8064837-50E0-4CE3-89C8-D3CF99F1A5C1}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8064837-50E0-4CE3-89C8-D3CF99F1A5C1}.Release|x86.Build.0 = Release|Any CPU
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Debug|x64.ActiveCfg = Debug|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Debug|x86.ActiveCfg = Debug|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Debug|x86.Build.0 = Debug|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Release|Any CPU.ActiveCfg = Release|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Release|x64.ActiveCfg = Release|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Release|x86.ActiveCfg = Release|x86
+		{855752CD-E532-4A36-A9E0-19EAA047A876}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

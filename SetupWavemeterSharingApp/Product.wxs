@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='Windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+  <Product Name='WavemeterSharingApp' Id='BC1807A5-A4A0-43D0-980F-CD89007121C7' UpgradeCode='AC13E890-1547-453B-87FA-85C9C6513F4E'
+    Language='1033' Codepage='1252' Version='1.0.0' Manufacturer='Matteo Mazzanti'>
+
+    <Package Id='*' Keywords='Installer' Description="WavemeterSharingApp 1.0 Installer"
+      Comments='WavemeterService is a software for sharing the Wavemeter data' Manufacturer='Matteo Mazzanti'
+      InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+    <Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+    <Property Id='DiskPrompt' Value="Wavemeter Service installation [1]" />
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Directory Id='ProgramFilesFolder' Name='PFiles'>
+        <Directory Id='MMazzanti' Name='MMazzanti'>
+          <Directory Id='INSTALLDIR1' Name='Wavemeter Sharing App'>
+            <Component Id='MainExecutable' Guid='791E52B3-74AF-417D-B886-A2946D704329'>
+              <File Id='WMSharingApp' Name='Wavemeter Sharing App.exe' DiskId='1' Source='..\WavemeterSharing\bin\Debug\netcoreapp3.1\WavemeterSharingApp.exe' KeyPath='yes' >
+                <Shortcut Id="WavemeterSharingAppLINK" Directory="ProgramMenuDir" Name="WavemeterSharingApp" WorkingDirectory='INSTALLDIR1' Icon="Icon.exe" IconIndex="0" Advertise="yes" />
+              </File>
+            </Component>
+            <Component Id='RequiredDlls' Guid='74A748D6-747F-4A13-8E35-812EB0975E25'>
+              <File Id='WMSharingAppDll' Name='WavemeterSharingApp.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.dll' />
+              <File Id='JsonDll' Name='Newtonsoft.Json.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\Newtonsoft.Json.dll'/>
+            </Component>
+            <Component Id='WMDll' Guid='339C5EF8-4C0E-4A7A-A159-2A329A44F2CC'>
+              <File Id='WavemeterDllFile' Name='wlmData.dll' DiskId='1' Source='..\WavemeterService\bin\Debug\lib\wlmData.dll' KeyPath='yes'  />
+            </Component>
+            <Component Id='RequiredSettings' Guid='771472BB-325B-4178-890F-67DAB4BB7D16'>
+              <File Id='WavemeterSharingApp.deps.json' Name='WavemeterSharingApp.deps.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.deps.json' />
+              <File Id='WavemeterSharingApp.runtimeconfig.json' Name='WavemeterSharingApp.runtimeconfig.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.runtimeconfig.json' />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="WavemeterService">
+          <Component Id="ProgramMenuDir" Guid="42B01E41-7C96-4F3D-937D-237E13AE1D06">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="StartupFolder" Name="StartupFolder">
+        <Directory Id="MyShortcutFolder" Name = "WavemeterSharingStartup" >
+          <!-- Auto-start via Registry -->
+          <Component Id="WavemeterSharingAppAutostart" Guid="605EC4DA-B0E5-4B23-BEAD-4F64F8D113EA">
+            <RemoveFolder Id='MyShortcutFolder' On='uninstall' />
+            <RegistryValue Id="MerAs.rst" Root="HKMU" Action="write"
+                           Key="Software\Microsoft\Windows\CurrentVersion\Run"
+                           Name="Wavemeter Sharing App"
+                           Value="[INSTALLDIR1]WavemeterSharingApp.exe"
+                           Type="string" />
+            <Condition>ASSISTANCE_START_VIA_REGISTRY</Condition>
+          </Component>
+
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+    
+
+    <!-- <Feature Title='AllFeatures' Description ='Installation modes' TypicalDefault ='install' Id="InstallFeats" Level="4" ConfigurableDirectory='INSTALLDIR' Display='expand' AllowAdvertise='no'>-->
+
+
+
+    <!-- Feature is installed by default -->
+    <Feature Title='Wavemeter Service' Description ='Full installer without Wavemeter Dll' Id="NoInstallWMDll" Level="1" AllowAdvertise="no" ConfigurableDirectory="INSTALLDIR1">
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='RequiredDlls' />
+      <ComponentRef Id='RequiredSettings' />
+      <ComponentRef Id='ProgramMenuDir' />
+      <ComponentRef Id="WavemeterSharingAppAutostart" />
+
+      <!--<ComponentRef Id='WMDll' />-->
+    </Feature>
+
+    <!-- Feature is not installed by default -->
+    <Feature Title='Wavemeter Dll' Description ='Wavemter Dll. Do not install on the wavemeter PC, this is already included in System32 folder by the wavemeter software' TypicalDefault ='install' Id='InstallWMDll' Level='1000' AllowAdvertise='no' ConfigurableDirectory='INSTALLDIR1'>
+      <ComponentRef Id='WMDll' />
+    </Feature>
+    <!--</Feature>-->
+
+
+    <UIRef Id="WixUI_Mondo" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+    <!-- <Icon Id="WavemeterService.exe" SourceFile="icon.ico" />-->
+    <Icon Id="Icon.exe" SourceFile="..\Icons\icon.ico"/>
+    
+    <Property Id="ARPPRODUCTICON" Value="icon.exe" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="..\Icons\Banner.png" />
+    <WixVariable Id="WixUIDialogBmp" Value="..\Icons\BannerDialog.png" />
+  </Product>
+</Wix>
+
+
+
+<!-- <MediaTemplate />
+    
+    
+
+		<Feature Id="ProductFeature" Title="WavemeterServiceInstaller" Level="1">
+			<ComponentGroupRef Id="ProductComponent" />
+		</Feature>
+    
+    <Feature Id="ServiceDllFeature" Title="WavemeterServiceDll" Level="1">
+      <ComponentGroupRef Id="ServiceDllFolder" />
+    </Feature>
+    
+    <Icon Id="Icon.ico" SourceFile="..\WavemeterService\Icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+	</Product>
+
+	<Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="DllFolder" Name="lib">
+          <Component Id="Dlls" Guid="813F76D9-971C-4ECB-9518-A12971714C68"
+            SharedDllRefCount="no" KeyPath="no" NeverOverwrite="no" Permanent="no" Transitive="no"
+            Win64="no" Location="either">
+            <CreateFolder/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+    
+    
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WavemeterService" />
+          <Directory Id="BinFolder" Name="bin">
+          
+        </Directory>
+			</Directory>
+		</Directory>
+  </Fragment>
+  
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponent" Directory="BinFolder">
+      <Component Id="Dlls" Guid="B8237C72-97E6-4685-8CB2-366D20FF546F">
+        <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+        <File Id='JsonDLL' Name='Newtonsoft.Json.dll' DiskId='1' Vital='yes' Source='..\WavemeterService\bin\Debug\lib\Newtonsoft.Json.dll' KeyPath='yes'>
+        </File>
+      </Component>
+      
+      
+      <Component Id='MainExecutable' Guid='00CECED1-FBE6-47A7-89FC-9236A421415B'>
+        <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+        <File Id='WavemeterService' Name='WavemeterService.exe' DiskId='1' Vital='yes' Source='..\WavemeterService\bin\Debug\WavemeterService.exe' KeyPath='yes'>
+        </File>
+        <ServiceInstall Id="ServiceInstaller"
+                                Type="ownProcess"
+                                Name="WavemeterService"
+                                DisplayName="Wavemeter Service"
+                                Description="A service for sharing the wavemeter data"
+                                Start="auto"
+                                ErrorControl="normal"
+                                Account="LocalSystem"/>
+        <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="WavemeterService" Wait="yes" />
+      </Component>
+      
+      <Component Id='JsonDLL' Guid='B8237C72-97E6-4685-8CB2-366D20FF546F'>
+        <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+        <File Id='JsonDLL' Name='Newtonsoft.Json.dll' DiskId='1' Vital='yes' Source='..\WavemeterService\bin\Debug\lib\Newtonsoft.Json.dll' KeyPath='yes'>
+        </File>
+
+      </Component>
+			 TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+<!-- <Component Id="ProductComponent"> -->
+<!-- TODO: Insert files, registry keys, and other resources here. -->
+<!-- </Component>
+      </ComponentGroup>
+    </Fragment>
+</Wix>-->

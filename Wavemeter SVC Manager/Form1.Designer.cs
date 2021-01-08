@@ -41,9 +41,9 @@ namespace Wavemeter_SVC_Manager
             this.Logo = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuRestartSVC = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuRestartSVC = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -186,29 +186,29 @@ namespace Wavemeter_SVC_Manager
             this.MenuRestore,
             this.MenuClose});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(199, 100);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 133);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // MenuRestartSVC
+            // 
+            this.MenuRestartSVC.Name = "MenuRestartSVC";
+            this.MenuRestartSVC.Size = new System.Drawing.Size(240, 32);
+            this.MenuRestartSVC.Text = "Restart Service";
+            this.MenuRestartSVC.Click += new System.EventHandler(this.MenuRestartSVC_Click);
             // 
             // MenuRestore
             // 
             this.MenuRestore.Name = "MenuRestore";
-            this.MenuRestore.Size = new System.Drawing.Size(198, 32);
+            this.MenuRestore.Size = new System.Drawing.Size(240, 32);
             this.MenuRestore.Text = "Restore";
             this.MenuRestore.Click += new System.EventHandler(this.MenuRestore_Click);
             // 
             // MenuClose
             // 
             this.MenuClose.Name = "MenuClose";
-            this.MenuClose.Size = new System.Drawing.Size(198, 32);
+            this.MenuClose.Size = new System.Drawing.Size(240, 32);
             this.MenuClose.Text = "Close";
             this.MenuClose.Click += new System.EventHandler(this.MenuClose_Click);
-            // 
-            // MenuRestartSVC
-            // 
-            this.MenuRestartSVC.Name = "MenuRestartSVC";
-            this.MenuRestartSVC.Size = new System.Drawing.Size(198, 32);
-            this.MenuRestartSVC.Text = "Restart Service";
-            this.MenuRestartSVC.Click += new System.EventHandler(this.MenuRestartSVC_Click);
             // 
             // label3
             // 
