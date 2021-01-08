@@ -30,7 +30,8 @@ The Network settings can be saved using the save button. This to make it harder 
 
 ### Taskbar menu ###
 When minimized or closed the program will still run in background, to terminate it fully use the taskbar controls.
-Taskbar controls
+Taskbar controls:
+
 <a>
   <img src="https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingAppMenu.png" width="30%" height="30%">
 </a>
