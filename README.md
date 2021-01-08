@@ -2,16 +2,20 @@
   <img src="https://github.com/mmazzanti/WavemeterService/blob/master/WM_service_Logo.svg" width="100%" height="160">
 </a>
 
-WavemeterService is composed by three elements :
-* Installer : Installs the Wavemeter service or App
-* Wavemeter Service : A windows service that takes in charge to read the data (Wavelength and Spectral analysis) from the wavemeter and sends the data on a UDP connection
-* Wavemeter Service Manager : Controls the Service, easy way to start/stop/restart it
-* Wavemeter Sharing App : An app that does the same as Wavemeter service + Wavemeter service Manager
+WavemeterService is many elements :
+
+* *Wavemeter Service* : A windows service that takes in charge to read the data (Wavelength and Spectral analysis) from the wavemeter and sends the data on a UDP connection
+* *Wavemeter Service Manager* : Controls the Service, easy way to start/stop/restart it
+* *Wavemeter Sharing App* : An app that does the same as Wavemeter service + Wavemeter service Manager
+* *Installers* : Install the Wavemeter service or App
 
 The main idea is to use a Windows service to share the data coming from a wavemeter (Highfinesse), we want to be able to access the Wavelength and the spectral analysis from any PC on the network. The data is shared on a UDP connection. The broadcast address is choosed automatically by the program based on the network interface selected (eg. when connected to a Local Area Network with IP address 10.10.12.202/255 the calcualted broadcast address will be 10.10.12.255.
+
 The shared data can be easily read using python/c++ etc... For our purpose we'll need to integrate the reading procedure in one c++ software that we use to control the experiment, I will write the code in the following days and (perhaps) post it on github.
 For an easy python example have a look at the folder Examples
+
 __BEWARE__ : By deafault both installers don't install the wmData.dll needed for comunicating with the wavemeter through USB connection. This dll __must__ be the same as the one used by the software provided by the company (normally installed in sys32 or sysWOW64). If the wavemeter software is already installed the Wavemeter Service program will work without additional dlls. __However__ if you're using this software for debug/testing/whaver_other_reason you __must__ go through a custom installation and add the dll wmData.dll.
+
 ## Installers ##
 Wavemeter App : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/raw/master/SetupWavemeterSharingApp.msi)
 
