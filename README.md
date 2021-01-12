@@ -52,3 +52,7 @@ Taskbar controls:
   <img src="https://github.com/mmazzanti/WavemeterService/blob/master/Icons/WavemeterSharingAppMenu.png" width="30%" height="30%">
 </a>
 
+# Available clients #
+* Python : see Example folder
+* C++/Qt : [Wavemeter Client](https://github.com/wzl17/WMonitor)
+
