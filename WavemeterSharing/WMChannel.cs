@@ -58,6 +58,10 @@ namespace WavemeterSharingApp
             PatternSize = Cnt * Size;
             PatternitemsCnt = Cnt;
             PatternitemsSize = Size;
+            if(Patternhglobal != IntPtr.Zero) // If memory wasn't null we are re-writing data inside of it (WM update)
+            {
+                Marshal.FreeHGlobal(Patternhglobal); //Then we need to free the memory used previosly before reallocating
+            }
             Patternhglobal = Marshal.AllocHGlobal((int)PatternSize);
         }
         public void SetAnalysisSize(long Cnt,long Size)
