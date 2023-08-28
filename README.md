@@ -12,6 +12,7 @@ Wavemeter sharing app is available for windows only as the manufacturer wavemete
 
 You can download the last version installer here: [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/releases/tag/v1)
 
+<a href="https://www.buymeacoffee.com/mmazzanti" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ## Project Overview
 
