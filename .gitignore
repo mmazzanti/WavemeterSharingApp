@@ -7,6 +7,9 @@
 # MacOS crap
 **/.DS_Store
 
+# Old logo (svg)
+WM_service_Logo.svg
+
 # User-specific files
 *.rsuser
 *.suo
