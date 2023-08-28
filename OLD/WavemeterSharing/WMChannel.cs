@@ -55,22 +55,14 @@ namespace WavemeterSharingApp
         }
         public void SetPatternSize(long Cnt, long Size)
         {
-            if (Patternhglobal == IntPtr.Zero || PatternSize!= (Cnt * Size)) // If memory wasn't null we are re-writing data inside of it (WM update)
-            {//Then we need to free the memory used previosly before reallocating
-                PatternSize = Cnt * Size;
-                PatternitemsCnt = Cnt;
-                PatternitemsSize = Size;
-                Marshal.FreeHGlobal(Patternhglobal);
-                Patternhglobal = Marshal.AllocHGlobal((int)PatternSize);
-            }
-            else
+            PatternSize = Cnt * Size;
+            PatternitemsCnt = Cnt;
+            PatternitemsSize = Size;
+            if(Patternhglobal != IntPtr.Zero) // If memory wasn't null we are re-writing data inside of it (WM update)
             {
-                //Patternhglobal = Marshal.AllocHGlobal((int)PatternSize);
+                Marshal.FreeHGlobal(Patternhglobal); //Then we need to free the memory used previosly before reallocating
             }
-
-
-
-            
+            Patternhglobal = Marshal.AllocHGlobal((int)PatternSize);
         }
         public void SetAnalysisSize(long Cnt,long Size)
         {
@@ -102,11 +94,6 @@ namespace WavemeterSharingApp
         public IntPtr GetAnalysisPtr()
         {
             return Analysishglobal;
-        }
-        public void DeletePatternData()
-        {
-            SetPatternSize(0, 0);
-            PatternData = new int[0];
         }
 
         public void SetPatternDataFromPtr()

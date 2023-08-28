@@ -15,12 +15,6 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO.Compression;
 
-
-// For benchmarking
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
-using System.Diagnostics;
-
 namespace WavemeterSharingApp
 {
     public partial class Form1 : Form
@@ -28,9 +22,8 @@ namespace WavemeterSharingApp
         private System.Threading.Thread t;
         private Boolean first_close = true;
         private Boolean runt = true;
-        int PORT = 9897;
+        int PORT = 9898;
         private Boolean[] ChToshare;
-        private Boolean[] PattToshare;
 
         UdpClient udpClient = new UdpClient();
 
@@ -73,7 +66,7 @@ namespace WavemeterSharingApp
             }
         }
         private static void GetIPBroadcast()
-        {
+        { 
             foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (netInterface.Supports(NetworkInterfaceComponent.IPv4) && netInterface.Name == Settings1.Default.Connection)
@@ -113,8 +106,7 @@ namespace WavemeterSharingApp
         }
         private void MenuStart_Click(object sender, EventArgs e)
         {
-            if (runt == false)
-            {
+            if(runt == false) {
                 button1_Click(sender, e);
             }
 
@@ -136,7 +128,6 @@ namespace WavemeterSharingApp
         {
             InitializeComponent();
             ChToshare = new Boolean[8];
-            PattToshare = new Boolean[8];
             LoadChannelsShare();
             GetIPBroadcast();
             t = new System.Threading.Thread(UpdateStatusLoop);
@@ -150,12 +141,12 @@ namespace WavemeterSharingApp
 
         private void LoadSettings()
         {
-            textBox1.Text = Settings1.Default.Connection;
-            RefreshRate.Value = Settings1.Default.RefreshRate;
-            RefreshRatio.Value = Settings1.Default.RefreshRateFreq;
+        textBox1.Text = Settings1.Default.Connection;
+        RefreshRate.Value= Settings1.Default.RefreshRate;
+        RefreshRatio.Value = Settings1.Default.RefreshRateFreq;
         }
 
-        private void LoadChannelsShare()
+            private void LoadChannelsShare()
         {
             ChToshare[0] = Settings1.Default.Channel1;
             Ch1CheckBox.Checked = ChToshare[0];
@@ -173,23 +164,6 @@ namespace WavemeterSharingApp
             Ch7CheckBox.Checked = ChToshare[6];
             ChToshare[7] = Settings1.Default.Channel8;
             Ch8CheckBox.Checked = ChToshare[7];
-
-            PattToshare[0] = Settings1.Default.PattCh1;
-            PattCh1Checkbox.Checked = PattToshare[0];
-            PattToshare[1] = Settings1.Default.PattCh2;
-            PattCh2Checkbox.Checked = PattToshare[1];
-            PattToshare[2] = Settings1.Default.PattCh3;
-            PattCh3Checkbox.Checked = PattToshare[2];
-            PattToshare[3] = Settings1.Default.PattCh4;
-            PattCh4Checkbox.Checked = PattToshare[3];
-            PattToshare[4] = Settings1.Default.PattCh5;
-            PattCh5Checkbox.Checked = PattToshare[4];
-            PattToshare[5] = Settings1.Default.PattCh6;
-            PattCh6Checkbox.Checked = PattToshare[5];
-            PattToshare[6] = Settings1.Default.PattCh7;
-            PattCh7Checkbox.Checked = PattToshare[6];
-            PattToshare[7] = Settings1.Default.PattCh8;
-            PattCh8Checkbox.Checked = PattToshare[7];
         }
         private void SaveChannelsShare()
         {
@@ -201,15 +175,6 @@ namespace WavemeterSharingApp
             Settings1.Default.Channel6 = ChToshare[5];
             Settings1.Default.Channel7 = ChToshare[6];
             Settings1.Default.Channel8 = ChToshare[7];
-
-            Settings1.Default.PattCh1 = PattToshare[0];
-            Settings1.Default.PattCh2 = PattToshare[1];
-            Settings1.Default.PattCh3 = PattToshare[2];
-            Settings1.Default.PattCh4 = PattToshare[3];
-            Settings1.Default.PattCh5 = PattToshare[4];
-            Settings1.Default.PattCh6 = PattToshare[5];
-            Settings1.Default.PattCh7 = PattToshare[6];
-            Settings1.Default.PattCh8 = PattToshare[7];
         }
         private void UpdateChannelsShare()
         {
@@ -236,25 +201,22 @@ namespace WavemeterSharingApp
             SetPattern(Globals.cSignal1Grating, Globals.cPatternEnable); //Enable the loading of the pattern array in memory
             int looper = 0;
             UpdateChannelsShare(); // Update which channels the user selected and need to be shared
-            Console.WriteLine("Start of data acquisition process");
             while (true)
             {
                 if (runt == false)
                 {
                     SetStatus(false);
-                    break;
+                    break; 
                 }
                 //SVC.LoadServiceInfo();
                 if (runt == true)
                 {
-
+                    
                     for (int i = 0; i < 8; i++)
                     {
-                        if (ChToshare[i] == false)
+                        if (ChToshare[i]==false)
                         {
-                            //Don't share that channel (remove old memory)
-                            WMDATA[i].DeletePatternData();
-                            //WMDATA[i].SetPatternSize(0, 0); 
+                            WMDATA[i].SetPatternSize(0, 0); //Don't share that channel (remove old memory)
                             continue;
                         }
                         double Freq = GetFrequencyNum(i + 1, 0);
@@ -262,28 +224,27 @@ namespace WavemeterSharingApp
                         //Only once every [numericUpDown2] we send the all frequency pattern
                         if (looper == (int)RefreshRatio.Value)
                         {
-                            //UpdateChannelsShare(); // Update which channels the user selected and need to be shared
+                            UpdateChannelsShare(); // Update which channels the user selected and need to be shared
                             //looper = 0;
-                            // If we wanna share the pattern of tha channel
-                            if (PattToshare[i])
+                            WMDATA[i].SetPatternSize(GetPatternItemCount(Globals.cSignal1Grating), GetPatternItemSize(Globals.cSignal1Grating));
+                            if (WMDATA[i].GetPatternSize() > 0)
                             {
-                                WMDATA[i].SetPatternSize(GetPatternItemCount(Globals.cSignal1Grating), GetPatternItemSize(Globals.cSignal1Grating));
-                                if (WMDATA[i].GetPatternSize() > 0)
+                                GetPatternDataNum(i + 1, Globals.cSignal1Grating, WMDATA[i].GetPatternPtr());
+                                WMDATA[i].SetPatternDataFromPtr();
+
+                                /*for (int el = 0; el < WMDATA[i].GetPatternItemCnt(); el++)
                                 {
-                                    GetPatternDataNum(i + 1, Globals.cSignal1Grating, WMDATA[i].GetPatternPtr());
-                                    WMDATA[i].SetPatternDataFromPtr();
-                                }
-                            }
+                                   Console.WriteLine(Marshal.ReadIntPtr(WMDATA[i].Patternhglobal, el * (int)WMDATA[i].GetPatternItemSize()));
+                                }*/
+                            } 
                         }
-                        else
-                        {
-                            WMDATA[i].DeletePatternData();
-                            //WMDATA[i].SetPatternSize(0, 0);
+                        else {
+                            WMDATA[i].SetPatternSize(0, 0);
                         }
                         //WMDATA[i].SetPatternSize(GetPatternItemCount(Globals.cSignal1Grating), GetPatternItemSize(Globals.cSignal1Grating));
                         //WMDATA.SetWL(i,WL);
                     }
-                    if (looper == (int)RefreshRatio.Value) { looper = 0; }
+                    if (looper == (int)RefreshRatio.Value) { looper = 0;  }
                     var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(WMDATA));
                     //var data = Compress(datauncomp);
 
@@ -291,19 +252,19 @@ namespace WavemeterSharingApp
                     {
                         udpClient.Send(data, data.Length, IPaddr.ToString(), PORT); //IMPORTANT!! CHANGE THIS TO THE SUBNET BROADCAST ADDRESS (10.10.12.255) THE ROUTERS DON'T FORWARD 255.255.255.255
                     }
-                }
-                looper++;
-                Thread.Sleep((int)RefreshRate.Value);
+                    }
+                    looper++;
+                    Thread.Sleep((int)RefreshRate.Value);
             }
             udpClient.Client.Close();
             udpClient.Client.Dispose();
         }
 
-        private static byte[] Compress(byte[] datauncompressed)
+        private static byte[] Compress(byte [] datauncompressed)
         {
             using (var memoryStream = new System.IO.MemoryStream())
             {
-                using (GZipStream gZipStream = new GZipStream(memoryStream, CompressionMode.Compress))
+                using (var gZipStream = new GZipStream(memoryStream, CompressionMode.Compress))
                 {
                     gZipStream.Write(datauncompressed);
                 }
@@ -323,7 +284,7 @@ namespace WavemeterSharingApp
                 richTextBox1.ScrollToCaret();
             }
         }
-        private void SetStatus(Boolean STS)
+            private void SetStatus(Boolean STS)
         {
             if (this.StatusBox.InvokeRequired)
             {
@@ -337,7 +298,7 @@ namespace WavemeterSharingApp
                     StopProcessButton.Enabled = true;
                     StartProcessButton.Enabled = false;
                     StatusBox.Checked = true;
-                    StatusBox.BackColor = Color.GreenYellow;
+                    StatusBox.BackColor= Color.GreenYellow;
                     StatusBox.Text = Convert.ToString("Running");
                 }
                 else
@@ -474,46 +435,6 @@ namespace WavemeterSharingApp
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void PattCh1Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[0] = PattCh1Checkbox.Checked;
-        }
-
-        private void PattCh2Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[1] = PattCh2Checkbox.Checked;
-        }
-
-        private void PattCh3Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[2] = PattCh3Checkbox.Checked;
-        }
-
-        private void PattCh4Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[3] = PattCh4Checkbox.Checked;
-        }
-
-        private void PattCh5Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[4] = PattCh5Checkbox.Checked;
-        }
-
-        private void PattCh6Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[5] = PattCh6Checkbox.Checked;
-        }
-
-        private void PattCh7Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[6] = PattCh7Checkbox.Checked;
-        }
-
-        private void PattCh8Checkbox_CheckedChanged(object sender, EventArgs e)
-        {
-            PattToshare[7] = PattCh8Checkbox.Checked;
         }
     }
 }

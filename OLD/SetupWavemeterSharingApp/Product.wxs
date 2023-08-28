@@ -15,20 +15,20 @@
         <Directory Id='MMazzanti' Name='MMazzanti'>
           <Directory Id='INSTALLDIR1' Name='Wavemeter Sharing App'>
             <Component Id='MainExecutable' Guid='791E52B3-74AF-417D-B886-A2946D704329'>
-              <File Id='WMSharingApp' Name='Wavemeter Sharing App.exe' DiskId='1' Source='..\WavemeterSharing\bin\Release\net7.0-windows\WavemeterSharingApp.exe' KeyPath='yes' >
+              <File Id='WMSharingApp' Name='Wavemeter Sharing App.exe' DiskId='1' Source='..\WavemeterSharing\bin\Debug\netcoreapp3.1\WavemeterSharingApp.exe' KeyPath='yes' >
                 <Shortcut Id="WavemeterSharingAppLINK" Directory="ProgramMenuDir" Name="WavemeterSharingApp" WorkingDirectory='INSTALLDIR1' Icon="Icon.exe" IconIndex="0" Advertise="yes" />
               </File>
             </Component>
             <Component Id='RequiredDlls' Guid='74A748D6-747F-4A13-8E35-812EB0975E25'>
-              <File Id='WMSharingAppDll' Name='WavemeterSharingApp.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\net7.0-windows\WavemeterSharingApp.dll' />
-              <File Id='JsonDll' Name='Newtonsoft.Json.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\net7.0-windows\Newtonsoft.Json.dll'/>
+              <File Id='WMSharingAppDll' Name='WavemeterSharingApp.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.dll' />
+              <File Id='JsonDll' Name='Newtonsoft.Json.dll' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\Newtonsoft.Json.dll'/>
             </Component>
             <Component Id='WMDll' Guid='339C5EF8-4C0E-4A7A-A159-2A329A44F2CC'>
-              <File Id='WavemeterDllFile' Name='wlmData.dll' DiskId='1' Source='..\WavemeterSharing\lib\wlmData.dll' KeyPath='yes'  />
+              <File Id='WavemeterDllFile' Name='wlmData.dll' DiskId='1' Source='..\WavemeterService\bin\Debug\lib\wlmData.dll' KeyPath='yes'  />
             </Component>
             <Component Id='RequiredSettings' Guid='771472BB-325B-4178-890F-67DAB4BB7D16'>
-              <File Id='WavemeterSharingApp.deps.json' Name='WavemeterSharingApp.deps.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\net7.0-windows\WavemeterSharingApp.deps.json' />
-              <File Id='WavemeterSharingApp.runtimeconfig.json' Name='WavemeterSharingApp.runtimeconfig.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\net7.0-windows\WavemeterSharingApp.runtimeconfig.json' />
+              <File Id='WavemeterSharingApp.deps.json' Name='WavemeterSharingApp.deps.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.deps.json' />
+              <File Id='WavemeterSharingApp.runtimeconfig.json' Name='WavemeterSharingApp.runtimeconfig.json' DiskId='1' Source='..\WavemeterSharing\bin\Release\netcoreapp3.1\publish\WavemeterSharingApp.runtimeconfig.json' />
             </Component>
           </Directory>
         </Directory>
