@@ -125,7 +125,3 @@ Taskbar controls:
 * C++/Qt : [Wavemeter Client](https://github.com/wzl17/WMonitor)
 
 Thank you for considering WavemeterService. We hope this repository simplifies the sharing of wavelength data from Toptica:tm:/Highfinesse:tm: wavelength meters for your needs.
-
-
-<a href="https://www.buymeacoffee.com/mmazzanti" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
