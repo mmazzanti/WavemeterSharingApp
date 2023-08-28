@@ -56,17 +56,14 @@ __IMPORTANT__ : In order to keep the data easily accessible I decided to seriali
 __BEWARE__ : By deafault both installers don't install the wmData.dll needed for comunicating with the wavemeter through USB connection. This dll __must__ be the same as the one used by the software provided by the company (normally installed in sys32 or sysWOW64). If the wavemeter software is already installed the Wavemeter Service program will work without additional dlls. However if you're using this software for debug/testing/whaver_other_reason on a PC where the manufacturer software wasn't installed, you have go through a custom installation and add the dll wmData.dll.
 
  --->
-## Installers ##
-Wavemeter App : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/raw/master/SetupWavemeterSharingApp.msi)
-
-Wavemeter Service (deprecated): [Wavemeter Service Installer](https://github.com/mmazzanti/WavemeterService/raw/master/WavemeterServiceInstaller.msi)
+## Releases ##
+Wavemeter App v1 : [Wavemeter App Installer](https://github.com/mmazzanti/mmazzanti/WavemeterService/releases/tag/v1)
 
 ## Proof of concept ##
 
 Here's a small gif showing the data being read by another PC on the network using the python script given in the Example folder:
 
 ![GWSA_SHARED](https://github.com/mmazzanti/WavemeterService/blob/master/Icons/Shared_WL.gif)
-
 The wavemeter Sharing App was installed on the PC connected to the wavemeter in the same network
 ----
 
