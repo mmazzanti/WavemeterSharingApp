@@ -7,6 +7,12 @@
 
 WavemeterSharingApp is a Windows application designed for sharing wavelengths obtained from Toptica:tm:/HighFinesse:tm: wavelength meters.
 
+## Releases ##
+Wavemeter sharing app is available for windows only as the manufacturer wavemeter software is provided only for windows platforms.
+
+You can download the last version installer here: [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/releases/tag/v1)
+
+
 ## Project Overview
 
 The repository encompasses several components, with a focus on facilitating the sharing of wavelength data:
@@ -56,8 +62,6 @@ __IMPORTANT__ : In order to keep the data easily accessible I decided to seriali
 __BEWARE__ : By deafault both installers don't install the wmData.dll needed for comunicating with the wavemeter through USB connection. This dll __must__ be the same as the one used by the software provided by the company (normally installed in sys32 or sysWOW64). If the wavemeter software is already installed the Wavemeter Service program will work without additional dlls. However if you're using this software for debug/testing/whaver_other_reason on a PC where the manufacturer software wasn't installed, you have go through a custom installation and add the dll wmData.dll.
 
  --->
-## Releases ##
-Wavemeter App v1 : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/releases/tag/v1)
 
 ## Proof of concept ##
 
