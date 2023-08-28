@@ -57,7 +57,7 @@ __BEWARE__ : By deafault both installers don't install the wmData.dll needed for
 
  --->
 ## Releases ##
-Wavemeter App v1 : [Wavemeter App Installer](https://github.com/mmazzanti/mmazzanti/WavemeterService/releases/tag/v1)
+Wavemeter App v1 : [Wavemeter App Installer](https://github.com/mmazzanti/WavemeterService/releases/tag/v1)
 
 ## Proof of concept ##
 
@@ -65,7 +65,6 @@ Here's a small gif showing the data being read by another PC on the network usin
 
 ![GWSA_SHARED](https://github.com/mmazzanti/WavemeterService/blob/master/Icons/Shared_WL.gif)
 The wavemeter Sharing App was installed on the PC connected to the wavemeter in the same network
-----
 
 ## Wavemeter Sharing App
 
